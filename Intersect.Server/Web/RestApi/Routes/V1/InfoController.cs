@@ -1,6 +1,8 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 
 using Intersect.Server.General;
+using Intersect.Server.Metrics;
 using Intersect.Server.Web.RestApi.Attributes;
 
 namespace Intersect.Server.Web.RestApi.Routes.V1
@@ -53,6 +55,12 @@ namespace Intersect.Server.Web.RestApi.Routes.V1
             };
         }
 
+        [Route("metrics")]
+        [HttpGet]
+        public object StatsMetrics()
+        {
+            return MetricsRoot.Instance.Metrics;
+        }
     }
 
 }
