@@ -491,6 +491,7 @@ namespace Intersect.Server.Entities
                         //Check to see if we can spawn events, if already spawned.. update them.
                         lock (mEventLock)
                         {
+                            var autorunEvents = 0;
                             foreach (var mapEvent in surrMap.EventsCache)
                             {
                                 if (mapEvent != null)
@@ -522,8 +523,10 @@ namespace Intersect.Server.Entities
                                     {
                                         foundEvent.Update(timeMs, foundEvent.MapInstance);
                                     }
+                                    autorunEvents += mapEvent.Pages.Count(p => p.Trigger == EventTrigger.Autorun);
                                 }
                             }
+                            MapAutorunEvents = autorunEvents;
                         }
                     }
 
